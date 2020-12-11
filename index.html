@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
-
+    <link rel="icon" href="images/favicon-6648f4a8.ico">
     <style media="screen">
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -279,7 +279,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-bb68fddf.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-e033bdd3.js"></script>
 
@@ -288,7 +288,13 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;php&quot;,&quot;javascript&quot;]">
+    <div class="navbar navbar-fixed-top">
+      <img src="images/logo-e73561a6.svg" class="img-logo" alt="" />
+      <div class="slogan">
+        <span>API Reference</span>
+      </div>
+    </div>
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -296,12 +302,10 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="php">PHP - cURL</a>
+              <a href="#" data-language-name="javascript">JavaScript - Fetch</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -309,22 +313,41 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#product" class="toc-h1 toc-link" data-title="Product">Product</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#search-dimension-by-sku" class="toc-h2 toc-link" data-title="Search dimension by Sku">Search dimension by Sku</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-all-sku-of-supported-catalog" class="toc-h2 toc-link" data-title="Get all sku of supported catalog">Get all sku of supported catalog</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#order" class="toc-h1 toc-link" data-title="Order">Order</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-an-order" class="toc-h2 toc-link" data-title="Create an Order">Create an Order</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-order-tracking" class="toc-h2 toc-link" data-title="Get Order Tracking">Get Order Tracking</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#resources" class="toc-h1 toc-link" data-title="Resources">Resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#upload-file-to-library" class="toc-h2 toc-link" data-title="Upload file to library">Upload file to library</a>
+                  </li>
+                  <li>
+                    <a href="#search-library-by-code-image" class="toc-h2 toc-link" data-title="Search library by code image">Search library by code image</a>
                   </li>
               </ul>
           </li>
@@ -333,203 +356,1315 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://seller.geargag.com/dev/stores'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://geargag.com'>Documentation Powered by GearGag</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+        <h1 id='overview'>Overview</h1>
+<p>The GearGag API is organized around REST. Our API accepts JSON request payload and returns JSON-encoded responses,
+and uses standard HTTP response codes, authentication, and verbs.</p>
 <h1 id='authentication'>Authentication</h1>
+<p>The API uses Access Token to authenticate requests. Authentication to the API is performed via Token.
+Your Access Token carry many privileges, so be sure to keep them secure!
+Do not share your secret Access Token in publicly accessible areas such as GitHub, client-side code, and so forth.
+If you are currently logged in account settings, you can go to <a href="https://seller.geargag.com/dev/stores">[Stores Access Token]</a> and get API token there.</p>
+
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'URL_PLACE_HERE'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'URL_PLACE_HERE'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST/GET'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span><span class="s1">'{
+    "sku":""
+}'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+    <span class="s1">'Content-Type: application/json'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="c1">// TODO Something</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">URL_PLACE_HERE</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
 </code></pre></div>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>REPLACE_YOUR_TOKEN_HERE</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>GearGag uses API token to allow access to the API. You can get a new API token at <a href="https://seller.geargag.com/dev/stores">Stores Access Token</a>.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>GearGag expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>Authorization: REPLACE_YOUR_TOKEN_HERE</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>REPLACE_YOUR_TOKEN_HERE</code> with your personal API token.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='product'>Product</h1><h2 id='search-dimension-by-sku'>Search dimension by Sku</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.geargag.com/integrate/sku.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "sku":""
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/sku.json'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span><span class="s1">'{
+    "sku":""
+}'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+    <span class="s1">'Content-Type: application/json'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">sku</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/sku.json</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5346"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Front"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id_catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"4500x5400"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2400x3000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2100x2400"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2400x3200"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2800x3200"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"4200x4800"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
+<p>Returns formatted dimensions GearGag supports by sku.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><code>POST https://api.geargag.com/integrate/sku.json</code></p>
+<h3 id='request-json'>Request (json):</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>sku</td>
+<td>Yes</td>
+<td>String</td>
+<td>The Sku of product</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h3 id='response-json'>Response (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#product_data">data</a></td>
+<td>jsonArray</td>
+<td><img width=1000/></td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p><ins>data</ins><a name="product_data"></a>: The data is an array of</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Integer</td>
+<td>The Item ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The Item name, ex: &quot;Front&quot;</td>
+</tr>
+<tr>
+<td>id_catalog</td>
+<td>Integer</td>
+<td>The category ID of item</td>
+</tr>
+<tr>
+<td>dimensions</td>
+<td>stringArray</td>
+<td>a list dimensions ex: [&quot;4500x5400&quot;, &quot;2400x3000&quot;]</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h2 id='get-all-sku-of-supported-catalog'>Get all sku of supported catalog</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.geargag.com/integrate/sku.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/sku.json'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/sku.json</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"128"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Guys Tee"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GUYSTEE-BLACK-L-FRONT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apparel"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Front"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"129"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Guys Tee"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GUYSTEE-BLACK-M-FRONT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apparel"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Front"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"130"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Guys Tee"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GUYSTEE-BLACK-S-FRONT"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apparel"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"Color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"Side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Front"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>Returns all sku of supported catalog.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p><code>GET https://api.geargag.com/integrate/sku.json</code></p>
+<h3 id='request-json-2'>Request (json):</h3>
+<p>Not required</p>
+<h3 id='response-json-2'>Response (json):</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#all_sku_data">data</a></td>
+<td>jsonArray</td>
+<td><img width=1000/></td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><ins>data</ins><a name="all_sku_data"></a>: The data is an array of</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Integer</td>
+<td>Item&#39;s ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Item&#39;s name</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>String</td>
+<td>Item&#39;s SKU</td>
+</tr>
+<tr>
+<td>category</td>
+<td>String</td>
+<td>The category of item</td>
+</tr>
+<tr>
+<td><a href="#all_sku_attributes">attributes</a></td>
+<td>object</td>
+<td>Item&#39;s attributes</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p><ins>attributes</ins><a name="all_sku_attributes"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Color</td>
+<td>String</td>
+<td>Item&#39;s color</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>String</td>
+<td>Item&#39;s size</td>
+</tr>
+<tr>
+<td>Side</td>
+<td>String</td>
+<td>Item&#39;s side (Front/Back)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h1 id='order'>Order</h1><h2 id='create-an-order'>Create an Order</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.geargag.com/integrate/order.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "order_id": "AM-123",
+    "shipping_info": {
+        "full_name": "John",
+        "address_1": "Jennifer",
+        "address_2": "",
+        "city": "California",
+        "state": "CA",
+        "postcode": "12345",
+        "country": "US",
+        "email": "customer@example.com",
+        "phone": "0123456789"
+    },
+    "items": [
+        {
+            "name": "Example product",
+            "sku_external": "Geargag example",
+            "sku": "GUYSTEE-BLACK-L-0",
+            "quantity": 1,
+            "price": 22.99,
+            "currency": "USD",
+            "import_mockup_1": "https://shark.nyc3.digitaloceanspaces.com/2020/5/8/1585018074858-0814234699-Unisex-black-front.jpg",
+            "import_mockup_2": "",
+            "import_mockup_3": "",
+            "dimensions": [
+                {
+                    "name": "Front",
+                    "image_code": "5F6AE6C167E48"
+                },
+                {
+                    "name": "Back",
+                    "image_code": "5F6AE6C167E48"
+                }
+            ]
+        }
+    ]
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/order.json'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span><span class="s1">'{
+    "order_id": "AM-123",
+    "shipping_info": {
+        "full_name": "John",
+        "address_1": "Jennifer",
+        "address_2": "",
+        "city": "California",
+        "state": "CA",
+        "postcode": "12345",
+        "country": "US",
+        "email": "customer@example.com",
+        "phone": "0123456789"
+    },
+    "items": [
+        {
+            "name": "Example product",
+            "sku_external": "Geargag example",
+            "sku": "GUYSTEE-BLACK-L-0",
+            "quantity": 1,
+            "price": 22.99,
+            "currency": "USD",
+            "import_mockup_1": "https://shark.nyc3.digitaloceanspaces.com/2020/5/8/1585018074858-0814234699-Unisex-black-front.jpg",
+            "import_mockup_2": "",
+            "import_mockup_3": "",
+            "dimensions": [
+                {
+                    "name": "Front",
+                    "image_code": "5F6AE6C167E48"
+                },
+                {
+                    "name": "Back",
+                    "image_code": "5F6AE6C167E48"
+                }
+            ]
+        }
+    ]
+}'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+    <span class="s1">'Content-Type: application/json'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">order_id</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">AM-123</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">shipping_info</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">full_name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">address_1</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Jennifer</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">address_2</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span><span class="dl">"</span><span class="s2">city</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">California</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">state</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">CA</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">postcode</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">12345</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">country</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">email</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">customer@example.com</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">phone</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0123456789</span><span class="dl">"</span><span class="p">},</span><span class="dl">"</span><span class="s2">items</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Example product</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">sku_external</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Geargag example</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">sku</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">GUYSTEE-BLACK-L-0</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">quantity</span><span class="dl">"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">price</span><span class="dl">"</span><span class="p">:</span><span class="mf">22.99</span><span class="p">,</span><span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">import_mockup_1</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">https://shark.nyc3.digitaloceanspaces.com/2020/5/8/1585018074858-0814234699-Unisex-black-front.jpg</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">import_mockup_2</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span><span class="dl">"</span><span class="s2">import_mockup_3</span><span class="dl">"</span><span class="p">:</span><span class="dl">""</span><span class="p">,</span><span class="dl">"</span><span class="s2">dimensions</span><span class="dl">"</span><span class="p">:[{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Front</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">image_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">5F6AE6C167E48</span><span class="dl">"</span><span class="p">},{</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">Back</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">image_code</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">5F6AE6C167E48</span><span class="dl">"</span><span class="p">}]}]});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/order.json</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order has been created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">666666</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
+<p>You can use Geargag Order API to import orders to your Geargag store and request fulfillment for these orders.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p><code>POST https://api.geargag.com/integrate/order.json</code></p>
+<h3 id='request-json-3'>Request (json):</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>order_id</td>
+<td>Yes</td>
+<td>String</td>
+<td>The Order number in your system. Use this order number to retrieve tracking number subsequently.</td>
+</tr>
+<tr>
+<td><a href="#shipping_info">shipping_info</a></td>
+<td>Yes</td>
+<td>Object</td>
+<td>Shipping address of the order.</td>
+</tr>
+<tr>
+<td><a href="#items">items</a></td>
+<td>Yes</td>
+<td>String</td>
+<td>An array of product items.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>shipping_info</ins><a name="shipping_info"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>full_name</td>
+<td>Yes</td>
+<td>String</td>
+<td>The customer name.</td>
+</tr>
+<tr>
+<td>address_1</td>
+<td>Yes</td>
+<td>String</td>
+<td>The customer address.</td>
+</tr>
+<tr>
+<td>address_2</td>
+<td>No</td>
+<td>String</td>
+<td>The customer address 2.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>No</td>
+<td>String</td>
+<td>The city name.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Yes</td>
+<td>String</td>
+<td>The state code.</td>
+</tr>
+<tr>
+<td>postcode</td>
+<td>No</td>
+<td>String</td>
+<td>The PostCode.</td>
+</tr>
+<tr>
+<td>country</td>
+<td>Yes</td>
+<td>String</td>
+<td>The country code.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>No</td>
+<td>String</td>
+<td>The customer email.</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>Yes</td>
+<td>String</td>
+<td>The customer phone.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>items</ins><a name="items"></a>: The items is an array of</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Yes</td>
+<td>String</td>
+<td>Title of product item.</td>
+</tr>
+<tr>
+<td>sku_external</td>
+<td>Yes</td>
+<td>String</td>
+<td>Sku_external is a unique string used to recognize your unique design for unique type of product. You can name your sku_external without limited ideas, however, be careful when you updating a existing sku_external with different designs &amp; a new type of product, the previous unfulfilled orders or new synced orders with the same sku_external will be changed too.</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>Yes</td>
+<td>String</td>
+<td>The SKU of product item.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Yes</td>
+<td>String</td>
+<td>Price of product item. Use this value to take advance of Geargag statistics feature.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>Yes</td>
+<td>String</td>
+<td>The currency of product item price.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Yes</td>
+<td>Integer</td>
+<td>The number of product items.</td>
+</tr>
+<tr>
+<td><a href="#dimensions">dimensions</a></td>
+<td>Yes</td>
+<td>Object</td>
+<td>The detailed dimensions of product item.</td>
+</tr>
+<tr>
+<td>import_mockup_1</td>
+<td>No</td>
+<td>URL</td>
+<td>(Link url of mockup 1)</td>
+</tr>
+<tr>
+<td>import_mockup_2</td>
+<td>No</td>
+<td>URL</td>
+<td>(Link url of mockup 2)</td>
+</tr>
+<tr>
+<td>import_mockup_3</td>
+<td>No</td>
+<td>URL</td>
+<td>(Link url of mockup 3)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>dimensions</ins><a name="dimensions"></a>: The dimensions is an array of</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>Yes</td>
+<td>String</td>
+<td>Applicable for some special products. For example, possible values: &quot;Front&quot; or &quot;Back&quot;.</td>
+</tr>
+<tr>
+<td>image_code</td>
+<td>Yes</td>
+<td>String</td>
+<td>The Image code.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h3 id='response-json-3'>Response (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#order_data">data</a></td>
+<td>jsonObject</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>data</ins><a name="order_data"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>Integer</td>
+<td>The ID of created GearGag order</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+<h2 id='get-order-tracking'>Get Order Tracking</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s1">'https://api.geargag.com/integrate/tracking.json?order_id=AM-123&amp;type=1'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/tracking.json?order_id=AM-123&amp;type=1'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'GET'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Cookie</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">__cfduid=d7bbd89652c29213f4b98d1581daa6a4d1607401176</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/tracking.json?order_id=AM-123&amp;type=1</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order has been created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">666666</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"order_id_import"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AM-123"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tracking_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>You can get order tracking after order was fulfilled by two ways which are by <code>order_id</code>.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.geargag.com/integrate/tracking.json</code></p>
+<h3 id='request-params'>Request Params:</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>Yes</td>
+<td>Integer</td>
+<td>GearGag OrderID</td>
+</tr>
+<tr>
+<td>type</td>
+<td>No</td>
+<td>Integer</td>
+<td>If type IS NULL or type = 1 then order_id exists on the system. If type = 2 then order_id that imported manual by customer</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h3 id='response-json-4'>Response (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#tracking_data">data</a></td>
+<td>jsonObject</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>data</ins><a name="tracking_data"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>Integer</td>
+<td>The ID of order</td>
+</tr>
+<tr>
+<td>order_id_import</td>
+<td>Integer</td>
+<td>The ID of imported order</td>
+</tr>
+<tr>
+<td>tracking_code</td>
+<td>String</td>
+<td>The code of tracking</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>Integer</td>
+<td>The SKU of product</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Integer</td>
+<td>The name of product</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody></table>
+<h1 id='resources'>Resources</h1><h2 id='upload-file-to-library'>Upload file to library</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.geargag.com/integrate/image.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'file=@"./GearGag/capture.png"'</span> <span class="se">\</span>
+<span class="nt">--form</span> <span class="s1">'code="TT123456"'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/image.json'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'file'</span><span class="o">=&gt;</span> <span class="k">new</span> <span class="nc">CURLFILE</span><span class="p">(</span><span class="s1">'./GearGag/capture.png'</span><span class="p">),</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="s1">'TT123456'</span><span class="p">),</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">formdata</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">formdata</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">file</span><span class="dl">"</span><span class="p">,</span> <span class="nx">fileInput</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="dl">"</span><span class="s2">./GearGag/capture.png</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">formdata</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">TT123456</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">formdata</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/image.json</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id_shop"</span><span class="p">:</span><span class="w"> </span><span class="mi">666666</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"artwork"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"capture.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TT123456"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"mime_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cdn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a7"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1442</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://pixillum.com/pro/IFkUOy0xwnLtXA4gRt7u2w/library/666666/4387/origin/666666_5fd09f5b79b1d.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File is an image - image/png."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">263</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">151</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-12-09 01:56:45"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"file_thumb"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://pixillum.com/pro/IFkUOy0xwnLtXA4gRt7u2w/library/666666/4387/thumb/666666_5fd09f5b79b1d.png"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Geargag support file format extension [&#39;gif&#39;, &#39;png&#39;, &#39;jpg&#39;, &#39;jpeg&#39;, &#39;svg&#39;, &#39;ttf&#39;, &#39;ai&#39;].</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST https://api.geargag.com/integrate/image.json</code></p>
+<h3 id='request-form-data'>Request (form-data):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>file</td>
+<td>Yes</td>
+<td>File</td>
+<td>The File data.</td>
+</tr>
+<tr>
+<td>code</td>
+<td>Yes</td>
+<td>String</td>
+<td>Code image of library <em>If code is null, code auto generate from name your file. Don&#39;t input special characters (&#39;^£$%&amp;</em>()}{@#~?&gt;&lt;&gt;,</td>
+</tr>
+</tbody></table>
+<h3 id='response-json-5'>Response (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>[Image has been uploaded]</td>
+</tr>
+<tr>
+<td><a href="#upload_image_data">data</a></td>
+<td>Object</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>data</ins><a name="upload_image_data"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of image</td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>The code of image</td>
+</tr>
+<tr>
+<td>mime_type</td>
+<td>String</td>
+<td>The image mine type</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Integer</td>
+<td>The image size</td>
+</tr>
+<tr>
+<td>note</td>
+<td>String</td>
+<td>The image note</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Integer</td>
+<td>The image with</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>The image height</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>Date</td>
+<td>The created date</td>
+</tr>
+<tr>
+<td>file</td>
+<td>URL</td>
+<td>The URL of image</td>
+</tr>
+<tr>
+<td>file_thumb</td>
+<td>URL</td>
+<td>The URL of thumb image</td>
+</tr>
+<tr>
+<td>data</td>
+<td>jsonObject</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h2 id='search-library-by-code-image'>Search library by code image</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--location</span> <span class="nt">--request</span> POST <span class="s1">'https://api.geargag.com/integrate/library.json'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span> <span class="se">\</span>
+<span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{
+    "code":"TT123456"
+}'</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'https://api.geargag.com/integrate/library.json'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span><span class="s1">'{
+    "code":"TT123456"
+}'</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'Authorization: REPLACE_YOUR_TOKEN_HERE'</span><span class="p">,</span>
+    <span class="s1">'Content-Type: application/json'</span><span class="p">,</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">myHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">();</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Authorization</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">REPLACE_YOUR_TOKEN_HERE</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myHeaders</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">Content-Type</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">application/json</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="dl">"</span><span class="s2">code</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">TT123456</span><span class="dl">"</span><span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">requestOptions</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="nx">myHeaders</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="nx">raw</span><span class="p">,</span>
+  <span class="na">redirect</span><span class="p">:</span> <span class="dl">'</span><span class="s1">follow</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">https://api.geargag.com/integrate/library.json</span><span class="dl">"</span><span class="p">,</span> <span class="nx">requestOptions</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="nx">error</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxxx"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"artwork"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"263"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"151"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/library/xxxxx/4387/origin/xxxxx_5fd09f5b79b1d.png"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Returns an image&#39;s information from library by <code>code</code>.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://api.geargag.com/integrate/library.json</code></p>
+<h3 id='request-json-4'>Request (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Yes</td>
+<td>String</td>
+<td>The Code of image</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+<h3 id='response-json-6'>Response (json):</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>true/false</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#library_data">data</a></td>
+<td>Object</td>
+<td><img width=1000/></td>
+</tr>
+</tbody></table>
+
+<p><ins>data</ins><a name="library_data"></a></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>The code of image</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>The type of image</td>
+</tr>
+<tr>
+<td>width</td>
+<td>Integer</td>
+<td>The image with</td>
+</tr>
+<tr>
+<td>height</td>
+<td>Integer</td>
+<td>The image height</td>
+</tr>
+<tr>
+<td>file</td>
+<td>URL</td>
+<td>The URL of image</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><img width=1000/></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+<p>The GearGag API uses the following error codes:</p>
 
-<p>The Kittn API uses the following error codes:</p>
+<p><strong>HTTP Response status code</strong></p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Status code</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -538,35 +1673,11 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized -- Your API token is wrong.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>422</td>
+<td>Bad Request/ Unprocessable Entity - Your data is invalid</td>
 </tr>
 <tr>
 <td>500</td>
@@ -578,13 +1689,30 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 </tr>
 </tbody></table>
 
+<p><strong>Data Response status value</strong></p>
+
+<table><thead>
+<tr>
+<th>Status value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>true</td>
+<td>Ok</td>
+</tr>
+<tr>
+<td>false</td>
+<td>Not OK</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="php">PHP - cURL</a>
+                <a href="#" data-language-name="javascript">JavaScript - Fetch</a>
           </div>
       </div>
     </div>
