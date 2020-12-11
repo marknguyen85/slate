@@ -2,6 +2,7 @@
 @import 'normalize';
 @import 'variables';
 @import 'icon-font';
+@import 'nav';
 // @import 'rtl'; // uncomment to switch to RTL format
 
 /*
@@ -54,7 +55,7 @@ html, body {
   overflow-x: hidden;
   position: fixed;
   z-index: 30;
-  top: 0;
+  top: 40px;
   left: 0;
   bottom: 0;
   width: $nav-width;
@@ -254,6 +255,7 @@ html, body {
   background-color: $main-bg;
   min-height: 100%;
 
+  margin-top: 40px;
   padding-bottom: 1px; // prevent margin overflow
 
   // The dark box is what gives the code samples their dark background.

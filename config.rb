@@ -57,7 +57,8 @@ end
 # Deploy Configuration
 # If you want Middleman to listen on a different port, you can set that below
 set :port, 4567
-
+# Global Variables
+set :endpoint, 'https://api.geargag.com'
 helpers do
   require './lib/toc_data.rb'
 end
